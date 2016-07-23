@@ -1,0 +1,6 @@
+aiohttp==0.20.2
+bencoder.pyx==1.0.0
+cchardet==1.0.0
+Maga==1.1.0
+motor==0.5
+tornado==4.3
