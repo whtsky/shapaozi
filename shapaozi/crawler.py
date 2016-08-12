@@ -9,7 +9,7 @@ from maga import Maga
 
 
 class SPZCrawler(Maga):
-    async def handler(self, infohash):
+    async def handler(self, infohash, addr):
         logging.info("See infohash: " + infohash)
         doc = await torrents_async.find_and_modify(
             {"infohash": infohash},
