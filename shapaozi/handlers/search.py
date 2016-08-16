@@ -4,7 +4,6 @@ import math
 
 from . import RequestHandler
 from .utils import infohash_simplified
-from tornado.escape import json_encode
 
 from tornado.web import HTTPError
 
@@ -57,9 +56,9 @@ class SearchHandler(RequestHandler):
         result_list = []
         async for result in cursor:
             result_list.append(infohash_simplified(result))
-        self.write(json_encode(dict(
+        self.write(dict(
             total=total,
             page=page,
             max_page=math.ceil(total/20),
             results=result_list
-        )))
+        ))

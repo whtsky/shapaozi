@@ -4,7 +4,6 @@ from . import RequestHandler
 from .utils import infohash_to_dict
 
 from tornado.web import HTTPError
-from tornado.escape import json_encode
 
 
 class DetailHandler(RequestHandler):
@@ -12,7 +11,7 @@ class DetailHandler(RequestHandler):
         data = await self.torrents.find_one({"infohash": infohash.upper()})
         if not data:
             raise HTTPError(404)
-        self.write(json_encode(infohash_to_dict(data)))
+        self.write(infohash_to_dict(data))
 
 
 class RandomHandler(RequestHandler):
@@ -29,7 +28,7 @@ class RandomHandler(RequestHandler):
             }
         }]):
             datas.append(infohash_to_dict(data))
-        self.write(json_encode({
+        self.write({
             "size": size,
             "data": datas
-        }))
+        })
