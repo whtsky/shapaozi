@@ -1,19 +1,12 @@
 app:
   build: .
-  volumes:
-    - .:/app/
-  environment:
-    MONGO_HOST: mongo
 
 api:
   extends:
     service: app
   command: python shapaozi/app.py
   restart: always
-  ports:
-    - "8000:8000"
-  links:
-    - mongo
+  net: "host"
 
 crawler:
   extends:
@@ -21,13 +14,12 @@ crawler:
   command: python shapaozi/crawler.py
   restart: always
   cpu_shares: 512
-  cpu_quota: 25000
-  ports:
-    - "6881"
-  links:
-    - mongo
+  net: "host"
 
 mongo:
   image: mongo:3.2.1
   cpu_shares: 4096
   restart: always
+  ports:
+    - "127.0.0.1:27017:27017"
+
