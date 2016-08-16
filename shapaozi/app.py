@@ -13,6 +13,7 @@ class Application(tornado.web.Application):
             (r"/api/search/([^/]+)", search.SearchHandler),
             (r"/api/search/([^/]+)/page/(\d+)", search.SearchHandler),
             (r"/api/infohash/([A-Za-z0-9]{40})", detail.DetailHandler),
+            (r"/api/random", detail.RandomHandler),
             (r"/api/status", status.StatusHandler),
         ], debug=True)
         import motor
